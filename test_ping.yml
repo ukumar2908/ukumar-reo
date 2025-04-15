@@ -1,0 +1,17 @@
+---
+- name: Test connectivity to AWS Web Servers
+  hosts: webservers
+  gather_facts: false
+
+  tasks:
+    - name: Ping hosts
+      ansible.builtin.ping:
+
+    - name: Print hostname
+      ansible.builtin.command: hostname
+      register: host_output
+
+    - name: Show hostname output
+      ansible.builtin.debug:
+        var: host_output.stdout
+
