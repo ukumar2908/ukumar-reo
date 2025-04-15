@@ -1,0 +1,33 @@
+---
+- name: List contents of common directories
+  hosts: webservers
+  gather_facts: false
+
+  tasks:
+    - name: List /tmp
+      ansible.builtin.command: ls -l /tmp
+      register: tmp_list
+      ignore_errors: true
+
+    - name: Show /tmp contents
+      ansible.builtin.debug:
+        var: tmp_list.stdout_lines
+
+    - name: List /var/tmp
+      ansible.builtin.command: ls -l /var/tmp
+      register: vartmp_list
+      ignore_errors: true
+
+    - name: Show /var/tmp contents
+      ansible.builtin.debug:
+        var: vartmp_list.stdout_lines
+
+    - name: List /etc
+      ansible.builtin.command: ls -l /etc
+      register: etc_list
+      ignore_errors: true
+
+    - name: Show /etc contents
+      ansible.builtin.debug:
+        var: etc_list.stdout_lines
+
